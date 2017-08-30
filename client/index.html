@@ -5,17 +5,19 @@
 		<script src="client/core.js"></script>
 		
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="client/style.css">
 	</head>
 	<body ng-app="foodoraApp" ng-controller="mainCtrl">
-		<div id="buttons">
-			<button ng-click="showData()"><i class="fa fa-th"></i> List</button>
-			<button ng-click="downloadData()"><i class="fa fa-download"></i> Download</button>
+		<div id="action">
+			<button class="item action" ng-click="showData()"><i class="fa fa-th"></i> List</button>
+			<button class="item action" ng-click="downloadData()"><i class="fa fa-download"></i> Download</button>
+			<input class="item action" ng-model="filter" type="text" placeholder="Filter" autofocus>
 		</div>
 		<div id="list">
-			<div ng-repeat="item in data">
-				{{item.code}}
-				{{item.name}}
+			<div class="item loc" ng-repeat="item in data | filter:filter">
+				<div class="code">{{item.code}}</div>
+				<div class="name">{{item.name}}</div>
 			</div>
 		</div>
 	</body>

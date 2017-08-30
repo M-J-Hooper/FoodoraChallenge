@@ -1,10 +1,14 @@
+//model layer for object-orienting the raw data from data layer
+
 module.exports = function() {
     function Location(code, name) {
         this.code = code;
         this.name = name;
     }
     
-    function DataSet(rawData) {
+    //data wrapper object whose constructor object-orients the raw data
+    //data prop is an array of Location objects
+    function DataWrapper(rawData) {
         var arr = rawData.split('\r\n');
         this.data = [];
         
@@ -20,11 +24,11 @@ module.exports = function() {
             }
             else if(line === '') start = true;
         }
-        
         return this;
     }
     
-    DataSet.prototype.parseToCsvString = function() {
+    //method of wrapper for parsing to csv formatted string
+    DataWrapper.prototype.parseToCsvString = function() {
         var str = '';                
         var start = false;
         for(let loc of this.data) {
@@ -33,7 +37,8 @@ module.exports = function() {
         return str;
     };
     
+    //export wrapper contructor for use in data layer
     return {
-        DataSet: DataSet
+        DataWrapper: DataWrapper
     };
 }();
