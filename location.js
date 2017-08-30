@@ -29,16 +29,17 @@ module.exports = function() {
     
     //method of wrapper for parsing to csv formatted string
     DataWrapper.prototype.parseToCsvString = function() {
-        var str = '';                
+        var arr = [];                
         var start = false;
         for(let loc of this.data) {
-            str += '"' + loc.code + '","' + loc.name + '"\r\n';
+            arr.push('"' + loc.code + '","' + loc.name + '"');
         }
-        return str;
+        return arr.join('\r\n');
     };
     
     //export wrapper contructor for use in data layer
     return {
-        DataWrapper: DataWrapper
+        DataWrapper: DataWrapper,
+        Location: Location
     };
 }();

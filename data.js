@@ -1,4 +1,4 @@
-//data layer for retrieval of raw data, independant of data structure
+//data access layer for retrieval of raw data, independant of data structure
 
 module.exports = function(dataSource) {
     var http = require('http');
@@ -42,6 +42,7 @@ module.exports = function(dataSource) {
     //return functions to be exported for use in server layer
     return {
         getJsonData: getJsonData,
-        getCsvData: getCsvData
+        getCsvData: getCsvData,
+        getData: getData
     };
 }('http://pastebin.com/raw/943PQQ0n'); //pass in data source
