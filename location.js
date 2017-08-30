@@ -12,17 +12,17 @@ module.exports = function() {
         var arr = rawData.split('\r\n');
         this.data = [];
         
-        var start = false;
+        var start = false; //only start processing lines when passed marker
         for(let line of arr) {
             if(start) {
                 var i = line.indexOf(' ');
-                if(i > 0) {
+                if(i > 0) { //only include 
                     var cells = [line.substr(0,i), line.substr(i+1).trim()];
                     var loc = new Location(cells[0], cells[1]);
                     this.data.push(loc);
                 }
             }
-            else if(line === '') start = true;
+            else if(line === '') start = true; //for this data the marker is an empty line
         }
         return this;
     }
