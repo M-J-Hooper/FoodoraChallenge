@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title>Foodora App</title>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+		<script src="client/core.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css" href="client/style.css">
+	</head>
+	<body ng-app="foodoraApp" ng-controller="mainCtrl">
+		<div id="buttons">
+			<button ng-click="showData()"><i class="fa fa-th"></i> List</button>
+			<button ng-click="downloadData()"><i class="fa fa-download"></i> Download</button>
+		</div>
+		<div id="list">
+			<div ng-repeat="item in data">
+				{{item.code}}
+				{{item.name}}
+			</div>
+		</div>
+	</body>
+</html>
