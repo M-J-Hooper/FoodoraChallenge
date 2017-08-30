@@ -1,6 +1,6 @@
 module.exports = function(dataSource) {
     var http = require('http');
-    var location = require("./location.js");
+    var DataSet = require("./location.js").DataSet;
     
     var getData = function(url) {
         return new Promise(function(resolve, reject) {
@@ -18,7 +18,7 @@ module.exports = function(dataSource) {
     var getJsonData = function() {
         return new Promise(function(resolve, reject) {
             getData(dataSource)
-                .then(data => resolve(location.parseToJson(data)))
+                .then(data => resolve(new DataSet(data).data))
                 .catch(err => reject(err));
         });
     };
@@ -26,7 +26,7 @@ module.exports = function(dataSource) {
     var getCsvData = function() {
         return new Promise(function(resolve, reject) {
             getData(dataSource)
-                .then(data => resolve(location.parseToCsv(data)))
+                .then(data => resolve(new DataSet(data).parseToCsvString()))
                 .catch(err => reject(err));
         });
     }

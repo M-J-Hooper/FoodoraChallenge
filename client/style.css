@@ -1,1 +1,27 @@
-body { margin: 0; }
+body { 
+    background: lightgrey;
+    margin: 0;
+}
+div {
+    margin: 10px;
+    padding: 5px;
+}
+button {
+    margin: 0;
+    padding: 0;
+    width: 50%;
+}
+#list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.item {
+    background: white;
+    flex-grow: 1;
+}
+.code {
+    
+}
+.name {
+    
+}

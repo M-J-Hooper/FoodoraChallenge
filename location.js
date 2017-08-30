@@ -4,39 +4,36 @@ module.exports = function() {
         this.name = name;
     }
     
-    var parseToJson = function(data) {
-        data = data.split('\r\n');
-        var arr = [];
-                
+    function DataSet(rawData) {
+        var arr = rawData.split('\r\n');
+        this.data = [];
+        
         var start = false;
-        for(let line of data) {
+        for(let line of arr) {
             if(start) {
                 var i = line.indexOf(' ');
-                var loc = new Location(line.substr(0,i), line.substr(i+1).trim());
-                arr.push(loc);
+                if(i > 0) {
+                    var cells = [line.substr(0,i), line.substr(i+1).trim()];
+                    var loc = new Location(cells[0], cells[1]);
+                    this.data.push(loc);
+                }
             }
             else if(line === '') start = true;
         }
-        return arr;
-    };
+        
+        return this;
+    }
     
-    var parseToCsv = function(data) {
-        data = data.split('\r\n');
-        var arr = [];
-                
+    DataSet.prototype.parseToCsvString = function() {
+        var str = '';                
         var start = false;
-        for(let line of data) {
-            if(start) {
-                var i = line.indexOf(' ');
-                arr.push(line.substr(0,i)+','+line.substr(i+1).trim());
-            }
-            else if(line === '') start = true;
+        for(let loc of this.data) {
+            str += '"' + loc.code + '","' + loc.name + '"\r\n';
         }
-        return arr.join('\r\n');
+        return str;
     };
     
     return {
-        parseToJson: parseToJson,
-        parseToCsv: parseToCsv
+        DataSet: DataSet
     };
 }();

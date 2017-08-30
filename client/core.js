@@ -6,22 +6,18 @@ app.controller('mainCtrl', function($scope, $http) {
     
     $scope.showData = function() {
     	$http.get('/api/show')
-            .success(function(data) {
-                $scope.data = data;
-                console.log(data);
-            })
-            .error(function(err) {
-                console.log('Error:', err);
-            });
+            .success(data => $scope.data = data)
+            .error(err => console.log('Error:', err));
     };
     
     $scope.downloadData = function() {
     	$http.get('/api/download')
-            .success(function(data) {
-                console.log(data);
-            })
-            .error(function(err) {
-                console.log('Error:', err);
-            });
+            .success(function(data, status, headers) {
+                var a = document.createElement('a');
+                a.href = 'data:attachment/csv,' + encodeURI(data);
+                a.target = '_blank';
+                a.download = 'locations.csv';
+                a.click();
+            }).error(err => console.log('Error:', err));
     };
 });

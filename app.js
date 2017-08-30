@@ -14,14 +14,8 @@ app.get('/api/show', function(req, res) {
 });
 app.get('/api/download', function(req, res) {
     data.getCsvData()
-        .then(function(data) {
-            console.log(data);
-            res.set({
-                'Content-Disposition': 'attachment; filename=\"locations.csv\"',
-                'Content-type': 'text/csv'
-            });
-            res.send(data);
-        }).catch(err => res.send(err));
+        .then(data => res.send(data))
+        .catch(err => res.send(err));
 });
 
 //route to index
