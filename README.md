@@ -1,4 +1,4 @@
-#Foodora Challenge
+# Foodora Challenge
 
 A simple node app that pulls data from resource.
 Angular frontend that either lists data in the browser or downloads it as a CSV file.
