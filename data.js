@@ -15,7 +15,11 @@ module.exports = function(dataSource) {
                 if (response.statusCode < 200 || response.statusCode > 299) {
                     reject(new Error('Failed to get data: ' + response.statusCode));
                 }
-                response.on('data', data => resolve(new DataWrapper(data)));
+                
+                //receive multiple chunks
+                var body = [];
+                response.on('data', (chunk) => body.push(chunk));
+                response.on('end', () => resolve(new DataWrapper(body.join(''))));
             });
             request.on('error', err => reject(err));
         });
